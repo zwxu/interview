@@ -46,11 +46,11 @@ public class Dynamic0_1 {
 	}
 	public static void main(String[] args){
 	    	init();//初始化表格
-	    	/*Item item1=new Item(10,60);
+	    	Item item1=new Item(10,60);
 			Item item2=new Item(20,100);
 			Item item3=new Item(30,120);
-			Item[] item={item1,item2,item3};  */
-	    	Scanner data=new Scanner(System.in);
+			Item[] item={item1,item2,item3};  
+	    	/*Scanner data=new Scanner(System.in);
 	    	Item[] item= new Item[N]; 
 	    	for(int i=0;i<N;i++){
 	    		String s=data.nextLine();
@@ -59,7 +59,7 @@ public class Dynamic0_1 {
 	    	int y=Integer.parseInt(sa[1]);
 	    	Item m=new Item(x,y);
 	    	item[i]=m;
-	    	}
+	    	}*/
 	    	System.out.println("背包所能装载的总重量是："+W);
 	    	show(item);
 	    	System.out.println("0-1背包的最大权值是："+pack(W, N-1, item, value)); 	
