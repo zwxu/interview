@@ -1,7 +1,9 @@
 package com.ustc.zwxu.arithmetic;
 
+import java.util.Random;
+
 public class QuickSortDemo {
-	public static int partition(int[] a,int p,int r){
+	private int partition(int[] a,int p,int r){
 		int i=p-1;
 		int x=a[r];
 		int temp;
@@ -20,28 +22,22 @@ public class QuickSortDemo {
 		return i+1;
 		
 	}
-	public static void quicksort(int a[],int p,int r){
+	private void quicksort(int a[],int p,int r){
 		if(p<r){
-			int q=partition(a,p,r);//1
-			quicksort(a,p,q-1);//递归的时候把方法调用存在堆栈里
+			//以此数化分为两个数组
+			int q=partition(a,p,r);
+			quicksort(a,p,q-1);
 			quicksort(a,q+1,r);
 		}	
 	}
 	public static void main(String[] args) {
-       int[] a = new int[100000];
-        for (int i = 0; i < 100000; i++) {
-            a[i] = (int)(Math.random()*500);
+       int[] a = {1,3,6,4,7};
+   
+		QuickSortDemo d= new QuickSortDemo();
+		d.quicksort(a,0,a.length-1);
+		for(int i:a)
+        {
+        	System.out.print(i+"--");
         }
-		long start=System.currentTimeMillis();
-		quicksort(a,0,a.length-1);
-		long end=System.currentTimeMillis();
-		for(int i=0;i<a.length;i++){
-			if(i%100==0){
-				System.out.println(" ");
-			}
-			System.out.print(a[i]+" ");
-		}
-		System.out.println("");
-		System.out.print("total time:"+(end-start)+"ms");
 }
 }
