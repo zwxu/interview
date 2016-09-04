@@ -46,11 +46,11 @@ public class GreedyPart {
 		}
 	}
 	public static void main(String[] args){
-		/*Item item1=new Item(10,60,6);
+		Item item1=new Item(10,60,6);
 		Item item2=new Item(20,100,5);
 		Item item3=new Item(30,120,4);
-		Item[] item={item1,item2,item3};*/
-		Scanner data=new Scanner(System.in);
+		Item[] item={item1,item2,item3};
+		/*Scanner data=new Scanner(System.in);
     	Item[] item= new Item[N]; 
     	for(int i=0;i<N;i++){
     		String s=data.nextLine();
@@ -60,7 +60,7 @@ public class GreedyPart {
     	int z=y/x;
     	Item m=new Item(x,y,z);
     	item[i]=m;
-    	}
+    	}*/
 		System.out.println("背包所能装载的总重量是："+W);
 		System.out.println("初始化背包信息");
 		show(item);
