@@ -7,31 +7,28 @@ public class BubbleSortDemo {
 	private void bubblesort(int a[]){
 		int i,j;
 		int temp;
-		int min;
+		boolean flag;
+
 		for(i=0;i<a.length;i++)
 		{
-			min = i;
-			for(j=i+1;j<a.length;j++)
+			flag=false;
+			for(j=0;j<a.length-i-1;j++)
 			{
-				if(a[min] > a[j])
+		
+				//冒泡排序  最好情况为O(n)
+				if(a[j] > a[j+1])
 				{
-					min=j;
-				}
-				//冒泡排序
-				/*if(a[i] > a[j])
-				{
-					temp=a[i];
-				    a[i]=a[j];
+					temp=a[j+1];
+				    a[j+1]=a[j];
 				    a[j]=temp;
-				}*/
+				    flag=true;
+				}
 					
 			}
-			if(min !=i)
-			{
-				temp=a[i];
-			    a[i]=a[min];
-			    a[min]=temp;
-			}
+			if(flag==false)
+				return;
+			
+			
 		}
 		
 		
