@@ -24,7 +24,7 @@ public class QuickSortDemo {
 	}
 	private void quicksort(int a[],int p,int r){
 		if(p<r){
-			//以此数化分为两个数组
+			//以此数划分为两个数组,此时越有序，划分效果月差，复杂度为O(n2)
 			int q=partition(a,p,r);
 			quicksort(a,p,q-1);
 			quicksort(a,q+1,r);
