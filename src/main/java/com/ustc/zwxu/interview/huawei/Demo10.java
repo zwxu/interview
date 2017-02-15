@@ -1,12 +1,12 @@
-/*package com.ustc.zwxu.interview.huawei;
+package com.ustc.zwxu.interview.huawei;
 
 import java.util.Scanner;
 
 public class Demo10 {
 
-	*//**
+	/**
 	 * 多线程
-	 *//*
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner scanner = new Scanner(System.in);
@@ -53,24 +53,25 @@ class MyThread extends Thread
 	
 	public void print()
 	{
-		while(start != c)
-		{
-			
-		}
-		
-		synchronized(lock)
-		{
-			System.out.print(c);
-			start += 1;
-			if(start == 'E')
-			{
-				start= 'A';
-			}
-		}
+		//违法的监控状态异常。当某个线程试图等待一个自己并不拥有的对象（O）的监控器
+		//或者通知其他线程等待该对象（O）的监控器时，抛出该异常。
+		while (start != c) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //此时锁住的是当前线程，通知其他线程失败，因为其他线程无法拥有，导致无法解锁
+        }
+        System.out.print(start);
+        start += 1;
+        if (start == 'E') {
+            start = 'A';
+        }
+        notifyAll();
 	}
 }
 
 
 	
 
-*/
