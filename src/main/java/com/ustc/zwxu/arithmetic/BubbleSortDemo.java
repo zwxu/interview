@@ -1,7 +1,7 @@
 package com.ustc.zwxu.arithmetic;
 
 
-
+//移动和比较次数都是n2
 public class BubbleSortDemo {
 
 	private void bubblesort(int a[]){
@@ -13,9 +13,10 @@ public class BubbleSortDemo {
 		{
 			flag=false;
 			for(j=0;j<a.length-i-1;j++)
+			//for(j=i+1;j<a.length;j++)
 			{
 		
-				//冒泡排序  最好情况为O(n)
+				//冒泡排序  最好情况时只需要比较n次O(n)
 				if(a[j] > a[j+1])
 				{
 					temp=a[j+1];
@@ -34,7 +35,7 @@ public class BubbleSortDemo {
 		
 	}
 	public static void main(String[] args) {
-       int[] a = {1,3,6,4,7};
+       int[] a = {1,9,6,4,7};
    
 		BubbleSortDemo d= new BubbleSortDemo();
 		d.bubblesort(a);

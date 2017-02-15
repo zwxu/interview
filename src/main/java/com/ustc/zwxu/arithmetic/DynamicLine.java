@@ -20,6 +20,7 @@ public class DynamicLine {
 		f2[0]=e2+a[1][0];
 		for(int j=1;j<n;j++)
 		{
+			//a 装配站
 			if(f1[j-1]+a[0][j] <=f2[j-1]+t[1][j-1]+a[0][j])
 			{
 				f1[j]=f1[j-1]+a[0][j];

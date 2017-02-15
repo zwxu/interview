@@ -20,7 +20,7 @@ public class CopyOfGreedyPart {
 			}
 			else
 			{
-				sum += (m/w[i])*(p[i]/w[i]);
+				sum += (m/w[i])*(p[i]/w[i]);//第一步找找最大平均重量
 				m -= w[i];
 			}
 		}
@@ -36,6 +36,6 @@ public class CopyOfGreedyPart {
 
 
     	double value = c.pack(50, 3, w, p);
-    	System.out.println("0-1背包的最大权值是："+value); 	
+    	System.out.println("完全背包的最大权值是："+value); 	
 	}
 }

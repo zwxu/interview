@@ -1,7 +1,7 @@
 package com.ustc.zwxu.arithmetic;
 
 
-
+//移动和比较次数都是n2
 public class InsertSortDemo {
 	
 	private void insertsort(int a[]){
@@ -11,7 +11,7 @@ public class InsertSortDemo {
 			key=a[j];
 			i=j-1;
 			//数组越有序移动次数越少
-			while(i>0 && a[i]>key)
+			while(i>-1 && a[i]>key)
 			{
 				a[i+1]=a[i];
 				i=i-1;
@@ -22,7 +22,7 @@ public class InsertSortDemo {
 		}
 	}
 	public static void main(String[] args) {
-       int[] a = {1,3,6,4,7};
+       int[] a = {5,1,2,3,4};
    
 		InsertSortDemo d= new InsertSortDemo();
 		d.insertsort(a);

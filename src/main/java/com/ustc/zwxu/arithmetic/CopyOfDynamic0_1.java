@@ -1,6 +1,10 @@
 package com.ustc.zwxu.arithmetic;
 
-
+/*
+ * 与分治法最大的差别是：适合于用动态规划法求解的问题，经分解后得到的子问题往往不是互相独立的
+ * （即下一个子阶段的求解是建立在上一个子阶段的解的基础上，进行进一步的求解）。
+ * 
+ */
 public class CopyOfDynamic0_1 {
 	private int max(int a,int b)
 	{
@@ -16,10 +20,10 @@ public class CopyOfDynamic0_1 {
 	public int pack(int m, int n, int[] w ,int[] p)
 	{ 
 		int v[][]= new int[n+1][m+1];  
-        for(int i = 0;i<n+1;i++)  
+       /* for(int i = 0;i<n+1;i++)  
             v[i][0]=0;  
         for(int j = 0;j<m+1;j++)  
-            v[0][j]=0;  
+            v[0][j]=0;  */
         //  
         for(int i = 1;i<n+1;i++){  
             for(int j = 1;j<m+1;j++){  
@@ -27,7 +31,7 @@ public class CopyOfDynamic0_1 {
                 //(1)物品i不放入背包中，所以c[i][j]为c[i-1][j]的值  
                 //(2)物品i放入背包中，则背包剩余重量为j-w[i-1],所以c[i][j]为c[i-1][j-w[i-1]]的值加上当前物品i的价值  
                 if(w[i-1]<=j){  
-                        v[i][j] = max(v[i-1][j],v[i-1][j-w[i-1]]+p[i-1]);  
+                        v[i][j] = max(v[i-1][j],v[i-1][j-w[i-1]]+p[i-1]);  //通过循环，得放第一个物品max，在此基础，放第二个物品max
                 }else  
                     v[i][j] = v[i-1][j];  
             }  

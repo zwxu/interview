@@ -1,6 +1,6 @@
 package com.ustc.zwxu.arithmetic;
 
-import java.util.Random;
+
 
 public class QuickSortDemo {
 	private int partition(int[] a,int p,int r){

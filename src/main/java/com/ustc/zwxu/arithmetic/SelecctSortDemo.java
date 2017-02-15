@@ -1,7 +1,7 @@
 package com.ustc.zwxu.arithmetic;
 
 
-
+//移动次数为n，比较次数为n2
 public class SelecctSortDemo {
 	//最坏情况为O(n2)
 	private void selectsort(int a[]){
@@ -30,7 +30,7 @@ public class SelecctSortDemo {
 		
 	}
 	public static void main(String[] args) {
-       int[] a = {1,3,6,4,7};
+       int[] a = {3,4,7,5,1};
    
 		SelecctSortDemo d= new SelecctSortDemo();
 		d.selectsort(a);
