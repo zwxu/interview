@@ -12,6 +12,7 @@ import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache.StartMode;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.apache.zookeeper.data.Stat;
 
 import com.google.gson.Gson;
 
@@ -23,10 +24,10 @@ import com.google.gson.Gson;
  * @created 2015-3-2
  */
 public class CarutorDemo {
-
+ 
     public static void main(String[] args) throws Exception {
         CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("127.0.0.1:2181")
+            .connectString("192.168.45.169:2181")
             .sessionTimeoutMs(5000)
             .connectionTimeoutMs(3000)
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
@@ -37,7 +38,7 @@ public class CarutorDemo {
         /*client.create()
             .creatingParentsIfNeeded()
             .forPath("/zk-huey/cnode", "hello".getBytes());*/
-       byte[] data = client.getData().forPath("/ifreeconf/baseinterface/development/hefei/notice");
+        //byte[] data = client.getData().forPath("/ifreeconf/baseinterface/development/hefei/notice");
         /*
         ModulesNotice notice = new Gson().fromJson(new String(data), ModulesNotice.class);
         System.out.print("haha:"+notice.getNid());*/
@@ -50,7 +51,7 @@ public class CarutorDemo {
         /**
          * 监听数据节点的变化情况
          */
-        /*final NodeCache nodeCache = new NodeCache(client, "/ifreeconf", false);
+        /*final NodeCache nodeCache = new NodeCache(client, "/ifreeconf/baseinterface/development/hefei/notice", false);
         nodeCache.start(true);
         nodeCache.getListenable().addListener(
             new NodeCacheListener() {
@@ -62,6 +63,7 @@ public class CarutorDemo {
             }, 
             pool
         );*/
+        
         
         /**
          * 监听子节点的变化情况
@@ -75,7 +77,7 @@ public class CarutorDemo {
                         throws Exception {
                         switch (event.getType()) {
                         case CHILD_ADDED:
-                            System.out.println("CHILD_ADDED: " + event.getData());
+                            System.out.println("CHILD_ADDED: " + event.getData().getPath());
                             break;
                         case CHILD_REMOVED:
                             System.out.println("CHILD_REMOVED: " + event.getData().getPath());
@@ -91,8 +93,9 @@ public class CarutorDemo {
             pool
         );
         
-        client.setData().forPath("/ifreeconf/baseinterface/development/hefei/notice", data);
-        
+        //client.setData().forPath("/ifreeconf/baseinterface/development/hefei/notice", data);
+        Stat s = client.checkExists().forPath("/ifreeconf/baseinterface/development/hefei/notice");
+        System.out.println(s);
         Thread.sleep(10 * 1000);
         pool.shutdown();
         client.close();

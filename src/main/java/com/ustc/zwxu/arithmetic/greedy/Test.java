@@ -6,47 +6,98 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
-class User
-{
-	private int name;
-	private int age;
-	public User(int name, int age) {
-		super();
-		this.name = name;
-		this.age = age;
-	}
-	public int getName() {
-		return name;
-	}
-	public void setName(int name) {
-		this.name = name;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
-	
-	
-}
+
 public class Test {
 
+	public static int[] getNext(String ps) {
+
+	    char[] p = ps.toCharArray();
+
+	    int[] next = new int[p.length];
+
+	    next[0] = -1;
+
+	    int j = 0;
+
+	    int k = -1;
+
+	    while (j < p.length - 1) {
+
+	       if (k == -1 || p[j] == p[k]) {
+	    	   //next[++j] = ++k;
+
+	    	   if (p[++j] == p[++k]) { // 当两个字符相等时要跳过
+
+	               next[j] = next[k];
+
+	            } else {
+
+	               next[j] = k;
+
+	            }
+
+	       } else {
+
+	           k = next[k];
+
+	       }
+
+	    }
+
+	    return next;
+
+	}
+	
+	public static int KMP(String ts, String ps) {
+
+	    char[] t = ts.toCharArray();
+
+	    char[] p = ps.toCharArray();
+
+	    int i = 0; // 主串的位置
+
+	    int j = 0; // 模式串的位置
+
+	    int[] next = getNext(ps);
+
+	    while (i < t.length && j < p.length) {
+
+	       if (j == -1 || t[i] == p[j]) { // 当j为-1时，要移动的是i，当然j也要归0
+
+	           i++;
+
+	           j++;
+
+	       } else {
+
+	           // i不需要回溯了
+
+	           // i = i - j + 1;
+
+	           j = next[j]; // j回到指定位置
+
+	       }
+
+	    }
+
+	    if (j == p.length) {
+
+	       return i - j;
+
+	    } else {
+
+	       return -1;
+
+	    }
+
+	}
 	/**
 	 * @param args
 	 * @throws UnsupportedEncodingException 
 	 */
 	public static void main(String[] args) throws UnsupportedEncodingException {
-		// TODO Auto-generated method stub
-		User u1 = new User(1,2);
-		User u2 = new User(3,4);
-		List<User> list = new ArrayList<User>();
-		Gson gson = new Gson();
-		String b = gson.toJson(u1);
-		System.out.print(new String(b.getBytes()));
-		User u = gson.fromJson(b.toString(), User.class);
 		
-		System.out.print(u.getAge());
+		KMP("abcdef","abab");//abab的组合也可以看成是两个ab的getNext组合
 	}
 
 }
