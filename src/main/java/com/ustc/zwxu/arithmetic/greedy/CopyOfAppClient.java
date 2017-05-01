@@ -19,7 +19,7 @@ import com.iflytek.ifreeconf.core.model.NodeModulesBean;
   
 
 
-public class AppClient {  
+public class CopyOfAppClient {  
     public static void main(String[] args) throws Exception{  
         CuratorFramework client = CuratorFrameworkFactory.newClient("127.0.0.1:2181", new ExponentialBackoffRetry(1000, 3));  
         client.start();  
@@ -28,31 +28,28 @@ public class AppClient {
         ServiceDiscovery<NodeInfoBean> serviceDiscovery = ServiceDiscoveryBuilder.builder(NodeInfoBean.class)
                 .client(client)
                 .serializer(new JsonInstanceSerializer<NodeInfoBean>(NodeInfoBean.class))
-                .basePath("/ifreeconf/client/BaseInterface/development")
+                .basePath("/ifreeconf/client/BaseInterface/development/hf")
                 .build();
         
         String localhost = NetUtils.getLocalHost();
         String caseId = String.format("%s_%s", localhost, DateUtils.now("yyyyMMddHHmmssSSS"));
         ServiceInstanceBuilder<NodeInfoBean> instanceBuilder = ServiceInstance.builder();
         instanceBuilder.name("client");
-        instanceBuilder.id(caseId);
+        instanceBuilder.id("123456789");
         instanceBuilder.address(localhost);
-        NodeInfoBean info = new NodeInfoBean();
-        info.setHost(localhost);
-        info.setPath("/user/test");
-        ConcurrentMap<String, NodeModulesBean> map = new ConcurrentHashMap<String, NodeModulesBean>();
-        NodeModulesBean bean = new NodeModulesBean();
-        bean.setCode("biz.biz-config-lingxi.properties");
-        bean.setId((long)26);
-        bean.setVersion(4);
-        map.put("key", bean);
-        info.setModuleslist(map);
-        instanceBuilder.payload(info);
         //instanceBuilder.payload(info);
-        //serviceDiscovery.updateService(instanceBuilder.build());
         
-        serviceDiscovery.registerService(instanceBuilder.build());
         serviceDiscovery.start();
+        serviceDiscovery.updateService(instanceBuilder.build());
+        
+        /*Collection<ServiceInstance<NodeInfoBean>> services = serviceDiscovery.queryForInstances("client");
+        for(ServiceInstance<NodeInfoBean> service : services) {  
+        	serviceDiscovery.updateService(service);
+        }  
+        */
+        
+        //serviceDiscovery.registerService(instanceBuilder.build());
+        
         System.in.read();
           
         //根据名称获取服务  

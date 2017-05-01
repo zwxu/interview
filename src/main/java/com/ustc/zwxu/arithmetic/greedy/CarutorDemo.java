@@ -1,5 +1,6 @@
 package com.ustc.zwxu.arithmetic.greedy;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -27,13 +28,20 @@ public class CarutorDemo {
  
     public static void main(String[] args) throws Exception {
         CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("192.168.45.169:2181")
+            .connectString("127.0.0.1:2181")
             .sessionTimeoutMs(5000)
             .connectionTimeoutMs(3000)
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
             .build();
         client.start();
-        
+        if(client.checkExists().forPath("/ifreeconf/client") == null) {
+			System.out.println("bye bye");
+		} else {
+			List<String> children = client.getChildren().forPath("/ifreeconf/client");
+			for(String s:children){
+				System.out.println(s);
+			}
+		}
         //client.delete().forPath("/zk-huey/cnode");
         /*client.create()
             .creatingParentsIfNeeded()
@@ -72,7 +80,6 @@ public class CarutorDemo {
         childrenCache.start(StartMode.POST_INITIALIZED_EVENT);
         childrenCache.getListenable().addListener(
             new PathChildrenCacheListener() {
-                @Override
                 public void childEvent(CuratorFramework client, PathChildrenCacheEvent event)
                         throws Exception {
                         switch (event.getType()) {
